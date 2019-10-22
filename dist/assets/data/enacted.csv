@@ -1,0 +1,10 @@
+className,start,end,act,census
+"act-odd census-odd","2017, 12, 23",,2017,2016
+"act-even census-even","2016, 4, 24","2017, 12, 23",2013,2016
+"act-even census-odd","2013, 3, 20","2016, 4, 24",2013,2011
+"act-odd census-even","2011, 4, 10","2013, 3, 20",2009,2011
+"act-odd census-odd","2009, 2, 24","2011, 4, 10",2009,2006
+"act-even census-even","2006, 4, 23","2009, 2, 24",2005,2006
+"act-even census-odd","2005, 7, 9","2006, 4, 23",2005,2002
+"act-odd census-odd","2002, 4, 28","2005, 7, 9",1998,2002
+"act-odd census-even","1998, 1, 1","2002, 4, 28",1998,1996

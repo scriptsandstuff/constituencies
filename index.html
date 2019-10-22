@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dail App</title> 
+		<link rel="stylesheet"  href="./dist/assets/vis.min.css">			
+		<!-- 	vis.css doesn't get loaded from cloulflare 
+			href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.css" 
+
+			unfortunately d3.tip doesn't work with jquery-ui style sheet
+			...there is undoubtedly an easy way to resolve the conflift 
+			...but excluding the ui.css is fine
+			it is not just the class d3-tip, have changed it and still tooltips with ui included
+ -->
+
+			<!-- <link rel="stylesheet" type="text/css" 
+				href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+		 		
+		<link 	rel="stylesheet" 
+				crossorigin="anonymous"
+  				integrity="sha256-YR4HrDE479EpYZgeTkQfgVJq08+277UXxMLbi/YP69o=" 
+  				href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css" />
+  		<link 	rel="stylesheet"
+  				crossorigin="anonymous" 
+		  		integrity="sha256-+ljPY6+jCmxVt1q1mWs/37w6FiKbc/TuqwlKZVkYwqE="  	
+		  		href="https://cdnjs.cloudflare.com/ajax/libs/dc/3.0.9/dc.css" /> -->
+
+		<link rel="stylesheet" type="text/css" href="./dist/assets/jquert-ui.css">
+		<link rel="stylesheet" type="text/css" href="./dist/assets/leaflet.css">
+		<link rel="stylesheet" type="text/css" href="./dist/assets/dc.css">
+ 	
+		<link rel="stylesheet" type="text/css" href="./dist/assets/my_styles.css">	
+</head>
+<body id="the-body">
+	<noscript>
+		<h1 id="nojs">
+			This page uses Javascript to show you a timeline and an map; both of which are interactive. Please enable Javascript in your browser to see the full page. Thank you.
+		</h1>
+	</noscript>	
+	<!-- <div id="cso-chart-tip"><img src="./dist/assets/CSO-chart.png"></img></div> -->
+		
+	<div id="intro-dlg">
+		<div>
+			In the preliminary results of <em>census 2016</em>, the Central Statistics Office published a 
+			<a id="cso-chart" title="" href="https://www.cso.ie/en/releasesandpublications/ep/p-cpr/censusofpopulation2016-preliminaryresults/geochan/#highchartDiv107506">vivid chart</a> depicting proportional representation in Ireland while making the following statement:
+			<blockquote>
+				Based on the preliminary population count of 4,757,976 persons and the current total of 158 TDs the average number of persons per TD for the country as a whole now sits at 30,114, above the constitutional limit of 30,000.
+			</blockquote><br>
+
+			In section 3.2 of their <a href="http://www.constituency-commission.ie/docs/Constituency%20Commission%20Report%202017.pdf">report</a> on 27 June 2017 the Constituency Commission made the following stunning observation:<br>
+			<blockquote>
+				Total Dáil membership ... stood at 166 from the 1980 revision ...The 2016 population at 4,761,865 is 1,393,648 (+41%) greater than in 1979. ... The Commission recommends that the total number of members of Dáil Éireann should be 160.
+			</blockquote><br>
+			<p>
+				Below is a chart of the representative ratio since the Republic was established.
+			</p>
+			<p>
+				Following is an app allowing exploration of the recent evolution of Dáil constituencies and TD-population ratios through a interavtive timeline and map.
+			</p>
+		</div>		
+
+		<div id="rep-compos-chart" style="height:15em"></div>
+	</div>
+
+
+	<!-- <button>Continue</button> -->
+	<!-- 
+		with reference to the most obvious interpretation article ##.## of Bunreacht na hEireann. We note that the conditions in the above article are not specified to apply on a constituency basis or otherwise. <br> 
+
+			
+		We also note that the current government enacted changes to boundaries 
+		We notice that the conditions of the constituency commission were also set by this Act eventhough they are usually set by a separate Act. 
+	
+		<p>
+			On December 23rd 2017, Dáil Éireann passed Act... ... imposing terms on the next Constituency Commisson and placing limits on TD numbers to be considered. 
+		</p>
+		<p>
+			We notice that the current Dáil will be disolved prior to the results of the next census. The next Constituency Commission will not be established before publication of the results of the next census. The results of the next census may require revision of the limits imposed by the above act. Historically, legislation on terms of the Constituency Commission had not been passed prior to publication of census results.
+		</p>		 
+	 -->
+	<!-- 		
+		Hover, click, scroll, drag enabled on both the timeline and map. <br>
+		Questions, comments, suggestions, bug reports welcome :)
+
+		<div class="notes">
+		<ul>
+			<li>Investigate the historic evolution of constituencies; run with abandon down every rabbit hole and accept every opportunity broaden and expose frontend and gis skills.</li>
+			<li>Note briefly that THIS CHART probably encapsulates the stated aim.</li>
+			<li>Persist the pursuit of rabbit holes</li>
+		</ul>		
+		</div>
+	 -->
+
+	<div id="left-container">
+		<div id="timeline-container">
+			<div id="IE-rep-timeline"></div>
+			<div class="arrow-up"></div>
+		</div>
+
+		<div id="event_detail">	
+			<div id="detail_table">
+				<div id='detail_names'>
+					<ul>
+						<li>Year of Act</li>
+						<li>Year of Census</li>
+					</ul>
+				</div>
+
+				<div id='detail_values'>
+					<ul>
+						<li class="details-item" id="details-act">&nbspxxxx</li>
+						<li class="details-item" id="details-census">&nbspXXXX</li>
+					</ul>
+				</div>
+				
+				<TABLE>
+					<TH>
+						<TD>Ratio</TD>
+						<TD>Population</TD>
+						<TD>TDs</TD>
+					</TH>
+					<TR>
+						<TD>Highest</TD>
+						<TD class="details-item details-highest" id="details-highest-ratio">XXXXX</TD>
+						<TD class="details-item details-highest" id="details-highest-pop">XXXXXX</TD>
+						<TD class="details-item details-highest" id="details-highest-tds">X</TD>
+					</TR>
+					<TR>
+						<TD>National</TD>
+						<TD class="details-item details-national" id="details-national-ratio">XXXXX</TD>
+						<TD class="details-item details-national" id="details-national-pop">XXXXXXX</TD>
+						<TD class="details-item details-national" id="details-national-tds">XXX</TD>
+					</TR>
+					<TR>
+						<TD>Lowest</TD>
+						<TD class="details-item details-lowest" id="details-lowest-ratio">XXXXX</TD>
+						<TD class="details-item details-lowest" id="details-lowest-pop">XXXXXX</TD>
+						<TD class="details-item details-lowest" id="details-lowest-tds">X</TD>
+					</TR>
+				</TABLE>
+			</div>
+			<div id="detail_text">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		
+			</div>						
+		</div>
+		<div>
+			<div id=histog></div>
+			<div id=rows_chart></div>
+		</div>
+	</div>		 
+	<div id="IE_map"></div>
+	
+	<!-- 
+		Should we expect to see a normal distribution? Why not maybe something with no tails?<br/>
+		Why do they look so normal?<br/>
+		Do a test for normality anyway and throw up the values <br>
+
+		<li>National Population</li>
+		<li>Total TDs</li>
+		<li>National Ratio</li>
+		<li>Highest</li>
+		<li>Lowest</li>
+	 -->	
+	<script type="text/javascript" src="./dist/app.bundle.js"></script>
+</body>
+</html>
+	
