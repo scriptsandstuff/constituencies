@@ -1,0 +1,53 @@
+{
+	"name": "constituencies",
+	"version": "1.0.0",
+	"description": "An exploration of the practicality of and technologies required to implement an app as discussed in the reddit link",
+	"main": "app.js",
+	"jest": {
+		"verbose": false
+	},
+	"scripts": {
+		"test": "jest",
+		"watch": "webpack ---mode development --devtool source-map --watch",
+		"dev_map": "webpack ---mode development --devtool source-map",
+		"dev": "webpack --mode development",
+		"dev_old": "webpack --devtool source-map",
+		"build_old": "webpack --devtool source-map src/js/app.js dist/app.bundle.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/scriptsandstuff/c.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/scriptsandstuff/c/issues"
+	},
+	"homepage": "https://github.com/scriptsandstuff/c#readme",
+	"dependencies": {
+		"crossfilter2": "^1.5.0",
+		"d3": "^5.14.2",
+		"d3-tip": "^0.9.1",
+		"dc": "^3.1.8",
+		"jquery": "^3.4.1",
+		"jquery-ui": "^1.12.1",
+		"leaflet": "^1.6.0",
+		"moment": "^2.24.0",
+		"request": "^2.88.0",
+		"requirejs": "^2.3.6",
+		"vis": "^4.21.0"
+	},
+	"devDependencies": {
+		"file-url": "^3.0.0",
+		"fs": "0.0.1-security",
+		"jest": "^24.9.0",
+		"jsdom": "^15.2.1",
+		"json-loader": "^0.5.7",
+		"node-fetch": "^2.6.0",
+		"path": "^0.12.7",
+		"webpack": "^4.41.2",
+		"webpack-cli": "^3.3.10",
+		"xmlhttprequest": "^1.8.0"
+	}
+}
