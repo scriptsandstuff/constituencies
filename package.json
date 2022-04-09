@@ -33,7 +33,7 @@
 		"jquery": "^3.4.1",
 		"jquery-ui": "^1.12.1",
 		"leaflet": "^1.6.0",
-		"moment": "^2.24.0",
+		"moment": "^2.29.2",
 		"request": "^2.88.0",
 		"requirejs": "^2.3.6",
 		"vis": "^4.21.0"
